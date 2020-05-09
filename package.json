@@ -7,17 +7,6 @@
     "nodemon": "nodemon server.js",
     "browsersync": "browser-sync start --proxy http://localhost:5000 --files 'public, views'"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Yuri-stack/PortifolioRocket.git"
-  },
-  "keywords": [],
-  "author": "Yuri Oliveira",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Yuri-stack/PortifolioRocket/issues"
-  },
-  "homepage": "https://github.com/Yuri-stack/PortifolioRocket#readme",
   "dependencies": {
     "express": "^4.17.1",
     "nunjucks": "^3.2.1"
