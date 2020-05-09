@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root{
+    --primary-color: #7159c1;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--primary-color);
+}
+
+header{ 
+    background-color: white;
+    width: 100%;
+    padding: 32px;
+    text-align: center;
+    box-sizing: border-box;     /*config. muito importante para deixar tudo alinha ao centro*/
+}
+
+.links{
+    font-size: 22px;
+}
+
+.links a + a{                   /*indicando que a config. afetará a partir do segundo item*/
+    margin-left: 32px;
+}
+
+.links a{
+    text-decoration: none;
+    color: #777;
+    position: relative;
+}
+
+.links a.active{
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.links a:hover{
+    color: var(--primary-color);
+}
+
+.links a::after{
+    content: "";
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+}
+
+.links a:hover::after{
+    width: 100%;
+    transition: width 700ms cubic-bezier(1, 0.23, 0.61, 0.7);
+}
+
+/*CARD*/
+
+.card{
+    background-color: white;
+    width: 800px;
+    height: 400px;
+    margin: 45px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    box-shadow: 0px 2px 6px -2px rgba(0, 0, 0, 0.2);
+    
+    /*animation*/
+    opacity: 0;
+    animation-name: up;
+    animation-duration: 200ms;
+    animation-fill-mode: forwards;  /*finaliza a animação no To(100%)*/
+    animation-timing-function: ease-in-out;
+    animation-delay: 1s;
+}
+
+/*animation*/
+@keyframes up{
+    from{
+        /* opacity: 0; */
+        transform: translateY(15px)
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+.card .avatar{
+    background: url('https://source.unsplash.com/collection/3465564/500x500') no-repeat center center / cover;
+    
+}
+
+
