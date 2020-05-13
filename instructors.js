@@ -1,6 +1,7 @@
 //Variáveis
-const fs = require('fs')                        //fs é um módulo que permite para interagir com o sistema de arquivos 
+const fs = require('fs')               //fs é um módulo que permite para interagir com o sistema de arquivos 
 const data = require('./data.json')
+const { age } = require('./utils')      //desistruturando o objeto e pegando somente o age
 
 
 //Função para CREATE
@@ -41,4 +42,27 @@ exports.post = function(req, res){                      //Post é o nome da fun�
 
         return res.redirect("/instructors")
     })
+}
+
+//Função para MOSTRAR
+
+exports.show = function(req, res){
+
+    const { id } = req.params
+
+    const foundInstructor = data.instructors.find(function(instructor){
+        return instructor.id == id
+    })
+
+    if(!foundInstructor) return res.send('Instructor not found')
+
+    const instructor = {
+        ...foundInstructor,                             //usando o operador Spread Operator onde ele armazena os outros campo do foundInstructor que não serão alterados
+        age: age(foundInstructor.birth),                //passando a data de nascimento em forma de timestamp para a função age(timestamp)
+        services: foundInstructor.services.split(','),  //transforma a String em uma Array, separando cada item por virgula
+        created_at: ""
+    }
+
+    return res.render('instructors/show', { instructor : instructor })
+
 }
