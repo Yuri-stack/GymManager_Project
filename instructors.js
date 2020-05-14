@@ -1,11 +1,10 @@
 //Variáveis
-const fs = require('fs')               //fs é um módulo que permite para interagir com o sistema de arquivos 
+const fs = require('fs')                //fs é um módulo que permite para interagir com o sistema de arquivos 
 const data = require('./data.json')
-const { age } = require('./utils')      //desistruturando o objeto e pegando somente o age
-
+const { age, date } = require('./utils')      //desistruturando o objeto e pegando somente o age
+const Intl = require('intl')            //importando o INTL para arrumar a data
 
 //Função para CREATE
-
 exports.post = function(req, res){                      //Post é o nome da função, mas poderia ser qualquer outro
                                                         //usando o metodo Post temos que pegar as info através do Req.Body
     const keys = Object.keys(req.body)                  //a var KEY está pegando o nome dos campos(key) do formulário através do Constructor Object e dá função Keys
@@ -45,7 +44,6 @@ exports.post = function(req, res){                      //Post é o nome da fun�
 }
 
 //Função para MOSTRAR
-
 exports.show = function(req, res){
 
     const { id } = req.params
@@ -57,12 +55,30 @@ exports.show = function(req, res){
     if(!foundInstructor) return res.send('Instructor not found')
 
     const instructor = {
-        ...foundInstructor,                             //usando o operador Spread Operator onde ele armazena os outros campo do foundInstructor que não serão alterados
-        age: age(foundInstructor.birth),                //passando a data de nascimento em forma de timestamp para a função age(timestamp)
-        services: foundInstructor.services.split(','),  //transforma a String em uma Array, separando cada item por virgula
-        created_at: ""
+        ...foundInstructor,                                         //usando o operador Spread Operator onde ele armazena os outros campo do foundInstructor que não serão alterados
+        age: age(foundInstructor.birth),                            //passando a data de nascimento em forma de timestamp para a função age(timestamp)
+        services: foundInstructor.services.split(','),              //transforma a String em uma Array, separando cada item por virgula
+        created_at: new Intl.DateTimeFormat('pt-BR').format(foundInstructor.created_at),    //pega o campo created_at e transforma ele em data 
     }
 
     return res.render('instructors/show', { instructor : instructor })
+}
+
+//Função para EDITAR
+exports.edit = function(req,res){
+    const { id } = req.params
+
+    const foundInstructor = data.instructors.find(function(instructor){
+        return instructor.id == id
+    })
+
+    if(!foundInstructor) return res.send('Instructor not found')
+
+    const instructor = {
+        ...foundInstructor,
+        birth: date(foundInstructor.birth)  //chamanda a função e passando como paramentro o nasc. do instrutor
+    }
+
+    return res.render('instructors/edit', { instructor })
 
 }
