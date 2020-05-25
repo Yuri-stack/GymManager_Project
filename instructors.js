@@ -1,11 +1,11 @@
 //Variáveis
-const fs = require('fs')                //fs é um módulo que permite para interagir com o sistema de arquivos 
+const fs = require('fs')                        //fs é um módulo que permite para interagir com o sistema de arquivos 
 const data = require('./data.json')
-const { age, date } = require('./utils')      //desistruturando o objeto e pegando somente o age
-const Intl = require('intl')            //importando o INTL para arrumar a data
+const { age, date } = require('./utils')        //desistruturando o objeto e pegando somente o age e date
+const Intl = require('intl')                    //importando o INTL para arrumar a data
 
 //Função para CREATE
-exports.post = function(req, res){                      //Post é o nome da função, mas poderia ser qualquer outro
+exports.post = function(req, res){              //Post é o nome da função, mas poderia ser qualquer outro
                                                         //usando o metodo Post temos que pegar as info através do Req.Body
     const keys = Object.keys(req.body)                  //a var KEY está pegando o nome dos campos(key) do formulário através do Constructor Object e dá função Keys
 
@@ -64,7 +64,7 @@ exports.show = function(req, res){
     return res.render('instructors/show', { instructor : instructor })
 }
 
-//Função para EDITAR
+//Função para CARREGAR INFORMAÇÕES PARA EDITAR
 exports.edit = function(req,res){
     const { id } = req.params
 
@@ -80,5 +80,70 @@ exports.edit = function(req,res){
     }
 
     return res.render('instructors/edit', { instructor })
+
+}
+
+//Função para ATUALIZAR
+exports.put = function(req, res){
+
+    const { id } = req.body
+    let index = 0
+
+    const foundInstructor = data.instructors.find(function(instructor, foundIndex){  //vai procurar o instrutor e a posição dele no array
+        if(id == instructor.id){
+            index = foundIndex
+            return true
+
+            /* 
+                verificamos se o instrutor procurado existe, e se existe pegamos seus dados e 
+                também atualizamos a variavel index com a posição desse instrutor no array 
+            */
+
+        }
+    })
+
+    if(!foundInstructor) return res.send('Instructor not found')
+
+    const instructor = {
+        ...foundInstructor,                 //usando o operador Spread Operator onde ele armazena os outros campo do foundInstructor que não serão alterados
+        ...req.body,                        //usando o operador Spread Operator onde ele armazena os dados vindo do req.body que não serão modificados
+        birth: date(req.body.birth)         //chamanda a função e passando como paramentro o nasc. do instrutor pego pelo req.body
+    }
+
+    data.instructors[index] = instructor    
+    /* pegamos as informações que foram alteradas e as que não foram relacionadas 
+    ao instrutor e atualizamos os dados desse instrutor na posição dele */
+
+    fs.writeFile("data.json", JSON.stringify(data, null, 2), function(err){
+        if(err) return res.send('Write error')
+
+        return res.redirect(`/instructors/${id}`)
+    })
+
+}
+
+//Função para APAGAR
+exports.delete = function(req, res){
+
+    const { id } = req.body
+
+    const filteredInstructors = data.instructors.filter(function(instructor){
+        return instructor.id != id
+    })
+
+    data.instructors = filteredInstructors
+
+    fs.writeFile("data.json", JSON.stringify(data, null, 2), function(err){
+        if(err) return res.send("Write file error")
+
+        return res.redirect("/instructors")
+    })
+
+    /* Para cada instrutor dentro do array, o método Filter faz um filtro verificando se 
+        o ID informado pelo req.body é diferente do ID que o método está verificando no Array.
+     
+        Quando o ID é diferente, ele é armazenado na constante filteredInstructors e quando 
+        for igual, ou seja, é o ID do instrutor que queremos apagar ele é retirado do Array.
+     */
 
 }

@@ -1,12 +1,12 @@
 {
   "instructors": [
     {
-      "id": 1,
+      "id": "1",
       "avatar_url": "https://avatars3.githubusercontent.com/u/62682253?s=460&u=c21b3e4cd06e2339e3f77c1875bc682267a827c3&v=4",
-      "name": "Yuri Oliveira",
-      "birth": 920592000000,
+      "name": "Yuri Oliveira da Silva",
+      "birth": "1999-03-05",
       "gender": "M",
-      "services": "Musculação, Yoga",
+      "services": "Musculação, Yoga, Natação",
       "created_at": 1589328081912
     }
   ]

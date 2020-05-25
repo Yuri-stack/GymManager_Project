@@ -1,21 +1,21 @@
-        <div class="item">
+            <div class="item">
                 <div>Avatar URL</div>
                 <div>
-                    <input type="url" name="avatar_url" placeholder="http://" value="{{ instructor.avatar_url }}">
+                    <input type="url" name="avatar_url" placeholder="http://" value="{{ instructor.avatar_url }}" required>
                 </div>
             </div>
             
             <div class="item">
-                <div>Instructor</div>
+                <div>Instrutor</div>
                 <div>
-                    <input type="text" name="name" placeholder="Nome do Instrutor" value="{{ instructor.name }}">
+                    <input type="text" name="name" placeholder="Nome do Instrutor" value="{{ instructor.name }}" required>
                 </div>
             </div>
 
             <div class="item">
                 <div>Data de Nascimento</div>
                 <div>
-                    <input type="date" name="birth" value="{{ instructor.birth }}">
+                    <input type="date" name="birth" value="{{ instructor.birth }}" required>
                 </div>
             </div>
 
@@ -23,14 +23,14 @@
                 <div>Sexo</div>
                 <div>
                     <span>
-                        <input type="radio" name="gender" value="M" 
+                        <input type="radio" name="gender" value="M" required 
                             {% if instructor.gender == "M" %}
                                 checked
                             {% endif %}>Masculino
                     </span>
 
                     <span>
-                        <input type="radio" name="gender" value="F" 
+                        <input type="radio" name="gender" value="F" required 
                             {% if instructor.gender == "F" %}
                                 checked
                             {% endif %}>Feminino
@@ -42,7 +42,7 @@
             <div class="item">
                 <div>Área de atuação</div>
                 <div>
-                    <input type="text" name="services"  value="{{ instructor.services }}" placeholder="Digite os serviços prestados por vírgula">
+                    <input type="text" name="services"  value="{{ instructor.services }}" placeholder="Digite os serviços prestados por vírgula" required>
                 </div>
             </div>
 
