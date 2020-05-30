@@ -1,13 +1,22 @@
 {
   "instructors": [
     {
-      "id": "1",
+      "id": 1,
       "avatar_url": "https://avatars3.githubusercontent.com/u/62682253?s=460&u=c21b3e4cd06e2339e3f77c1875bc682267a827c3&v=4",
       "name": "Yuri Oliveira da Silva",
-      "birth": "1999-03-05",
+      "birth": 920592000000,
       "gender": "M",
-      "services": "Musculação, Yoga, Natação",
+      "services": "Musculação, Natação",
       "created_at": 1589328081912
+    },
+    {
+      "id": 2,
+      "avatar_url": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
+      "name": "Ivone Oliveira",
+      "birth": -11491200000,
+      "gender": "F",
+      "services": "Yoga",
+      "created_at": 1590793473805
     }
   ]
 }

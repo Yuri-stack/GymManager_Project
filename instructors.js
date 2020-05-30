@@ -4,6 +4,13 @@ const data = require('./data.json')
 const { age, date } = require('./utils')        //desistruturando o objeto e pegando somente o age e date
 const Intl = require('intl')                    //importando o INTL para arrumar a data
 
+//Função para o INDEX
+exports.index = function(req, res){
+
+    return res.render("instructors/index", { instructors : data.instructors })
+
+}
+
 //Função para CREATE
 exports.post = function(req, res){              //Post é o nome da função, mas poderia ser qualquer outro
                                                         //usando o metodo Post temos que pegar as info através do Req.Body
@@ -105,9 +112,10 @@ exports.put = function(req, res){
     if(!foundInstructor) return res.send('Instructor not found')
 
     const instructor = {
-        ...foundInstructor,                 //usando o operador Spread Operator onde ele armazena os outros campo do foundInstructor que não serão alterados
-        ...req.body,                        //usando o operador Spread Operator onde ele armazena os dados vindo do req.body que não serão modificados
-        birth: date(req.body.birth)         //chamanda a função e passando como paramentro o nasc. do instrutor pego pelo req.body
+        ...foundInstructor,                 //usando o operador Spread Operator onde ele armazena os campos do foundInstructor que não serão alterados
+        ...req.body,                        //usando o operador Spread Operator onde ele armazena os dados vindo do req.body
+        birth: Date.parse(req.body.birth),  //chamanda a função e passando como paramentro o nasc. do instrutor pego pelo req.body
+        id: Number(req.body.id)
     }
 
     data.instructors[index] = instructor    
