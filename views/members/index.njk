@@ -9,22 +9,26 @@
         <table width="100%">
             <thead>                         {# cabeçalho da tabela #}
                 <tr>                        {# linha da tabela #}
-                    <th>Instructor</th>     {# coluna do cabeçalho da tabela #}
-                    <th>Atendimento</th>
+                    <th>Membro</th>     {# coluna do cabeçalho da tabela #}
+                    <th>Email</th>
+                    <th>Peso</th>
+                    <th>Altura</th>
                     <th>Ação</th>
                 </tr>
             </thead> 
 
             <tbody>                         {# corpo da tabela #}
                
-                {% for instructor in instructors %}
+                {% for member in members %}
                     <tr>                        
                         <td>
-                            <span style="background-image: url({{ instructor.avatar_url }})" ></span>
-                            {{ instructor.name }}
+                            <span style="background-image: url({{ member.avatar_url }})" ></span>
+                            {{ member.name }}
                         </td>
-                        <td>{{ instructor.services }}</td>  {# coluna do corpo da tabela #} 
-                        <td><a href="/instructors/{{ instructor.id }}">Ver</a></td>             
+                        <td>{{ member.email }}</td>  {# coluna do corpo da tabela #} 
+                        <td>{{ member.weight }}kg</td>  {# coluna do corpo da tabela #} 
+                        <td>{{ member.height }}cm</td>  {# coluna do corpo da tabela #} 
+                        <td><a href="/members/{{ member.id }}">Ver</a></td>             
                     </tr>
                {% endfor %}
                

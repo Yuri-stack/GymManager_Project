@@ -144,7 +144,7 @@ header{
 
 /*FORM*/
 
-form input{
+form input, select{
     width: 100%;
     outline: none;      /*linha de seleção do campo*/
     color: #555;

@@ -30,7 +30,7 @@ exports.post = function(req, res){              //Post é o nome da função, ma
     const lastMember = data.members[data.members.length - 1]    //pega o último item do array 
 
     if(lastMember){
-        id = lastMember.id                          //pega o id do último item do array         
+        id = lastMember.id + 1                          //pega o id do último item do array         
     }
 
     data.members.push({                             //aqui add os dados enviados pelo req.body para dentro do array chamado Members

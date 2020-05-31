@@ -8,7 +8,7 @@ routes.get('/', function(req, res){
 })
 
 routes.get('/instructors', instructors.index)
-routes.get('/instructors/create', members.redirectCreate)
+routes.get('/instructors/create', instructors.redirectCreate)
 routes.get('/instructors/:id', instructors.show)
 routes.get('/instructors/:id/edit', instructors.edit)
 routes.post('/instructors', instructors.post)

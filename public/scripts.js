@@ -13,3 +13,15 @@ for(item of menuItems){
         "instructors/2".include("2") = True
         "instructors/2".include("k") = False
 */
+
+function confirmDelete(){
+    const formDelete = document.querySelector("#form-delete")
+
+        formDelete.addEventListener("submit", function(event){
+            const confirmation = confirm("Deseja Apagar?")
+
+            if(!confirmation){
+                event.preventDefault()
+            }
+        })
+}
