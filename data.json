@@ -1,4 +1,17 @@
 {
+  "members": [
+    {
+      "avatar_url": "https://avatars3.githubusercontent.com/u/62682253?s=460&u=c21b3e4cd06e2339e3f77c1875bc682267a827c3&v=4",
+      "name": "Teste",
+      "email": "teste@teste",
+      "birth": 952214400000,
+      "gender": "M",
+      "blood": "O+",
+      "weight": "55",
+      "height": "170",
+      "id": 1
+    }
+  ],
   "instructors": [
     {
       "id": 1,

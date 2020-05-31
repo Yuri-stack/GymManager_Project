@@ -1,7 +1,7 @@
 //Variáveis
 const fs = require('fs')                        //fs é um módulo que permite para interagir com o sistema de arquivos 
-const data = require('./data.json')
-const { age, date } = require('./utils')        //desistruturando o objeto e pegando somente o age e date
+const data = require('../data.json')
+const { age, date } = require('../utils')        //desistruturando o objeto e pegando somente o age e date
 const Intl = require('intl')                    //importando o INTL para arrumar a data
 
 //Função para o INDEX
@@ -9,6 +9,11 @@ exports.index = function(req, res){
 
     return res.render("instructors/index", { instructors : data.instructors })
 
+}
+
+//Função que redireciona para a página de criação
+exports.redirectCreate = function(req, res){
+    return res.render('instructors/create')
 }
 
 //Função para CREATE
@@ -83,7 +88,7 @@ exports.edit = function(req,res){
 
     const instructor = {
         ...foundInstructor,
-        birth: date(foundInstructor.birth)  //chamanda a função e passando como paramentro o nasc. do instrutor
+        birth: date(foundInstructor.birth).iso  //chamanda a função e passando como paramentro o nasc. do instrutor
     }
 
     return res.render('instructors/edit', { instructor })

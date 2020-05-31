@@ -53,7 +53,11 @@ module.exports = {
             o 12.
         */
         
-        
-        return `${year}-${month}-${day}`
+        /* Retornando um objeto com várias informações para tratar caso seja necessario do backend */
+        return {
+            day, month, year,
+            iso: `${year}-${month}-${day}`,
+            birthDay: `${day}/${month}`
+        }
     }
 }
