@@ -1,7 +1,7 @@
 const express = require('express')
 const routes = express.Router()                 //declarando que a variavel routes irá gerenciar as rotas
-const instructors = require('./controllers/instructors')
-const members = require('./controllers/members')
+const instructors = require('./app/controllers/instructors')
+const members = require('./app/controllers/members')
 
 routes.get('/', function(req, res){
     return res.redirect("/instructors")

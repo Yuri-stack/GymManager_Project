@@ -1,7 +1,7 @@
 module.exports = {
     
     //timestamp de exemplo : 1167609600000 ou 05/03/1999
-    age: function (timestamp){                      //timestamp é uma cadeia de caracteres denotando a hora ou data que certo evento ocorreu 
+    age(timestamp){                      //timestamp é uma cadeia de caracteres denotando a hora ou data que certo evento ocorreu 
     
         const today = new Date()                                //pega a data de hoje
         const birthDate = new Date(timestamp)                   //pega a data de nascimento
@@ -38,7 +38,7 @@ module.exports = {
         */
     },
 
-    date: function (timestamp){
+    date(timestamp){
         const date = new Date(timestamp)
 
         const year = date.getUTCFullYear()                      //pegando o ano de forma universal, usando o UTC, do timestamp
