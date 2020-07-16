@@ -1,11 +1,16 @@
 //Variáveis
-const { age, date } = require('../../lib/utils.js')
+const Member = require('../models/Member')
+const { date } = require('../../lib/utils.js')
 
 module.exports = {
 
     //Função para o INDEX
     index(req, res){
-        return res.render("members/index")
+
+        Member.all(function(members){
+            return res.render("members/index", { members })
+        })
+
     },
 
     //Função que redireciona para a página de criação
@@ -15,7 +20,7 @@ module.exports = {
 
     //Função para CREATE
     post(req, res){
-                                                                                                         
+
         const keys = Object.keys(req.body)                  //a var KEY está pegando o nome dos campos(key) do formulário através do Constructor Object e dá função Keys
 
         for(key of keys){                                   //verificando se cada key está preenchidas
@@ -23,20 +28,34 @@ module.exports = {
                 return res.send('Please, fill all fields')
             }
         }
-    
-        return
+                                                                                                         
+        Member.create(req.body, function(member){           //aqui o member é o resultado da operação
+            return res.redirect(`/members/${ member.id }`)
+        })
     },
 
     //Função para MOSTRAR
     show(req, res){
 
-        return
+        Member.find( req.params.id, function( member ){
+            if(!member) return res.send("Member not found")
+
+            member.birth = date(member.birth).birthDay      //aqui ajustamos os dados para mostrar
+
+            return res.render("members/show", { member })
+        })
     },
 
     //Função para CARREGAR INFORMAÇÕES PARA EDITAR
     edit(req, res){
 
-        return
+        Member.find( req.params.id, function( member ){
+            if(!member) return res.send("Member not found")
+
+            member.birth = date(member.birth).iso                      //aqui ajustamos os dados para mostrar
+
+            return res.render("members/edit", { member })
+        })
     },
 
     //Função para ATUALIZAR
@@ -49,15 +68,19 @@ module.exports = {
                 return res.send('Please, fill all fields')
             }
         }
+
+        Member.update(req.body, function(){
+            return res.redirect(`/members/${req.body.id}`)
+        })
     
-        let { avatar_url, birth, name, services, gender } = req.body   //desestruturando o req.body
-    
-        return
     },
 
     //Função para APAGAR
     delete(req, res){
 
-        return
+        Member.delete(req.body.id, function(){
+            return res.redirect(`/members`)
+        })
     }
+    
 }

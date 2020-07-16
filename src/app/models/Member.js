@@ -3,10 +3,10 @@ const { date } = require('../../lib/utils')
 
 module.exports = {
 
-    //Função para selecionar todos os instrutores
+    //Função para selecionar todos os membros
     all( callback ){
 
-        db.query(`SELECT * FROM instructors ORDER BY name ASC`, (err, results) => {
+        db.query(`SELECT * FROM members ORDER BY name ASC`, (err, results) => {
             if(err) throw `Database Error! ${err}`
 
             callback(results.rows)
@@ -14,18 +14,20 @@ module.exports = {
 
     },
 
-    //Função para criar um novo Instrutor
+    //Função para criar um novo Membro
     create( data, callback ){                       //data aqui é o req.body
 
         const query = `
-            INSERT INTO instructors (
+            INSERT INTO members (
                 name,
                 avatar_url, 
                 gender,
-                services,
+                email,
                 birth,
-                created_at
-            ) VALUES ($1, $2, $3, $4, $5, $6)
+                blood,
+                weight,
+                height
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
             RETURNING id
         `
 
@@ -33,25 +35,27 @@ module.exports = {
             data.name,
             data.avatar_url,
             data.gender,
-            data.services,
+            data.email,
             date(data.birth).iso,
-            date(Date.now()).iso
+            data.blood,
+            data.weight,
+            data.height
         ]
         
         db.query(query, values, (err, results) => {
             if(err) throw `Database Error! ${err}`
             
-            callback(results.rows[0])               //estamos retornando o instrutor criado
+            callback(results.rows[0])               //estamos retornando o membro criado
             
         })
 
     },
 
-    //Função para retornar um Instrutor específico
+    //Função para retornar um Membro específico
     find( id, callback ){
 
         db.query(`
-            SELECT * FROM instructors WHERE id = $1`, [id], function(err, results){
+            SELECT * FROM members WHERE id = $1`, [id], function(err, results){
                 if(err) throw `Database Error! ${err}`
 
                 callback(results.rows[0])
@@ -59,17 +63,20 @@ module.exports = {
 
     },
 
-    //Função para atualizar um Instrutor
+    //Função para atualizar um Membro
     update( data, callback ){
 
         const query = `
-            UPDATE instructors SET 
+            UPDATE members SET 
                 avatar_url = ($1),
                 name = ($2),
                 birth = ($3),
                 gender = ($4),
-                services = ($5)
-            WHERE id = $6
+                email = ($5),
+                blood = ($6),
+                weight = ($7),
+                height = ($8)
+            WHERE id = $9
         `
 
         const values = [
@@ -77,7 +84,10 @@ module.exports = {
             data.name,
             date(data.birth).iso,
             data.gender,
-            data.services,
+            data.email,
+            data.blood,
+            data.weight,
+            data.height,
             data.id
         ]
 
@@ -88,10 +98,10 @@ module.exports = {
         })
     },
 
-    //Função para apagar um Instrutor
+    //Função para apagar um Membro
     delete( id, callback ){
 
-        db.query(`DELETE FROM instructors WHERE id = $1`, [id], (err, results) => {
+        db.query(`DELETE FROM members WHERE id = $1`, [id], (err, results) => {
             if(err) throw `Database Error! ${err}`
 
             return callback()
