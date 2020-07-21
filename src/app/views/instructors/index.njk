@@ -9,8 +9,9 @@
         <table width="100%">
             <thead>                         {# cabeçalho da tabela #}
                 <tr>                        {# linha da tabela #}
-                    <th>Instrutor</th>     {# coluna do cabeçalho da tabela #}
+                    <th>Instrutor</th>      {# coluna do cabeçalho da tabela #}
                     <th>Atendimento</th>
+                    <th>Alunos</th>
                     <th>Ação</th>
                 </tr>
             </thead> 
@@ -23,7 +24,8 @@
                             <span style="background-image: url({{ instructor.avatar_url }})" ></span>
                             {{ instructor.name }}
                         </td>
-                        <td>{{ instructor.services }}</td>  {# coluna do corpo da tabela #} 
+                        <td>{{ instructor.services }}</td>          {# coluna do corpo da tabela #} 
+                        <td>{{ instructor.total_students }}</td>    {# coluna do corpo da tabela #} 
                         <td><a href="/instructors/{{ instructor.id }}">Ver</a></td>             
                     </tr>
                {% endfor %}

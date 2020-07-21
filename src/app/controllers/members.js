@@ -15,7 +15,11 @@ module.exports = {
 
     //Função que redireciona para a página de criação
     redirectCreate(req, res){
-        return res.render('members/create') 
+
+        Member.instructorSelectOptions(function(options){
+            return res.render('members/create', { instructorOptions: options }) 
+        })
+        
     },
 
     //Função para CREATE
@@ -54,7 +58,9 @@ module.exports = {
 
             member.birth = date(member.birth).iso                      //aqui ajustamos os dados para mostrar
 
-            return res.render("members/edit", { member })
+            Member.instructorSelectOptions(function(options){
+                return res.render('members/edit', { member, instructorOptions: options }) 
+            })
         })
     },
 
