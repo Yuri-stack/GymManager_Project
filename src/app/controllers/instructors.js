@@ -7,17 +7,29 @@ module.exports = {
     //Função para o INDEX
     index(req, res){
 
-        const { filter } = req.query
+        let { filter, page, limit } = req.query
 
-        if(filter){
-            Instructor.findBy(filter, function(instructors){
-                return res.render("instructors/index", { instructors, filter })
-            })
-        }else{
-            Instructor.all(function(instructors){
-                return res.render("instructors/index", { instructors })
-            })
+        page = page || 1                    //se houver o parametro PAGE, recebe o próprio paramemetro, senão recebe 1
+        limit = limit || 2                  //se houver o parametro LIMIT, recebe o próprio paramemetro, senão recebe 2
+        let offset = limit * (page - 1)     //vamos pegar o num da PAGE menos 1 e multiplicar pelo LIMIT para trazer os registros de 2 em 2
+
+        const params = {
+            filter,
+            page,
+            limit,
+            offset,
+            callback(instructors){      //essa callback é a mesma callback que mandamos para o Model, aqui só estamos enviando dessa maneira para mostrar outra forma 
+
+                const pagination = {
+                    total: Math.ceil(instructors[0].total / limit),
+                    page
+                }
+                
+                return res.render("instructors/index", { instructors, pagination, filter })
+            }
         }
+
+        Instructor.paginate(params)
 
     },
 
