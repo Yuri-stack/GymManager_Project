@@ -7,9 +7,29 @@ module.exports = {
     //Função para o INDEX
     index(req, res){
 
-        Member.all(function(members){
-            return res.render("members/index", { members })
-        })
+        let { filter, page, limit } = req.query
+
+        page = page || 1                    //se houver o parametro PAGE, recebe o próprio paramemetro, senão recebe 1
+        limit = limit || 3                  //se houver o parametro LIMIT, recebe o próprio paramemetro, senão recebe 2
+        let offset = limit * (page - 1)     //vamos pegar o num da PAGE menos 1 e multiplicar pelo LIMIT para trazer os registros de 2 em 2
+
+        const params = {
+            filter,
+            page,
+            limit,
+            offset,
+            callback(members){      //essa callback é a mesma callback que mandamos para o Model, aqui só estamos enviando dessa maneira para mostrar outra forma 
+
+                const pagination = {
+                    total: Math.ceil(members[0].total / limit),
+                    page
+                }
+                
+                return res.render("members/index", { members, pagination, filter })
+            }
+        }
+
+        Member.paginate(params)
 
     },
 

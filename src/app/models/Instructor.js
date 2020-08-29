@@ -52,7 +52,7 @@ module.exports = {
 
     },
 
-    //Função para retornar um Instrutor específico
+    //Função para retornar os Instrutores
     find( id, callback ){
 
         db.query(`
@@ -64,6 +64,7 @@ module.exports = {
 
     },
 
+    //Função para retornar um Instrutor específico 
     findBy( filter, callback ){
 
         db.query(`

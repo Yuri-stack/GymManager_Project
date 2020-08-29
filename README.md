@@ -1,6 +1,7 @@
 <h1 align="center">
     <br>
-        <img src="public/images/index.png" alt="Gym Manager" width="480">
+        <img src="public/images/indexInstructors.png" alt="Index Instructors" width="480">
+        <img src="public/images/indexMembers.png" alt="Index Members" width="480">
     <br><br>
         Gym Manager 
 </h1>
@@ -17,8 +18,12 @@
     <a href="https://www.linkedin.com/in/yuri-silva99/" target="_blank">
         <img src="https://img.shields.io/badge/Author-Yuri%20Silva-blueviolet">
     </a>
+    <a href="#">
         <img src="https://img.shields.io/badge/Framework-Express-blueviolet">
+    </a>
+    <a href="#">
         <img src="https://img.shields.io/badge/Language-Javascript-blueviolet">
+    </a>
   </p>
 
 </div>
@@ -36,7 +41,8 @@
 - [X] Applying CRUD
 - [X] Relationships between tables
 - [X] Search filters
-- [ ] Pagination (Coming soon)
+- [X] Pagination
+- [X] Finished Project
 
 ## Getting started
 

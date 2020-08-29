@@ -10,7 +10,7 @@ module.exports = {
         let { filter, page, limit } = req.query
 
         page = page || 1                    //se houver o parametro PAGE, recebe o próprio paramemetro, senão recebe 1
-        limit = limit || 2                  //se houver o parametro LIMIT, recebe o próprio paramemetro, senão recebe 2
+        limit = limit || 3                  //se houver o parametro LIMIT, recebe o próprio paramemetro, senão recebe 2
         let offset = limit * (page - 1)     //vamos pegar o num da PAGE menos 1 e multiplicar pelo LIMIT para trazer os registros de 2 em 2
 
         const params = {
