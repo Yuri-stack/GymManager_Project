@@ -1,7 +1,6 @@
 <h1 align="center">
     <br>
         <img src="public/images/indexInstructors.png" alt="Index Instructors" width="480">
-        <img src="public/images/indexMembers.png" alt="Index Members" width="480">
     <br><br>
         Gym Manager 
 </h1>
